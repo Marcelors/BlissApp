@@ -4,6 +4,7 @@
     {
         public string Choice { get; private set; }
         public int Votes { get; private set; }
+        public Questions Question { get; private set; }
 
         private Choices() { }
 

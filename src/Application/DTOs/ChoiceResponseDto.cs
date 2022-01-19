@@ -1,8 +1,10 @@
-﻿namespace Application.DTOs
+﻿using Domain.Entities;
+
+namespace Application.DTOs
 {
-    public class ChoiceResponse
+    public class ChoiceResponseDto
     {
         public string Choice { get; set; }
-        public int Vote { get; set; }
+        public int Votes { get; set; }
     }
 }

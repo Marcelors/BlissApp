@@ -20,5 +20,7 @@ namespace Domain.Entities
             ThumbUrl = thumbUrl;
             PublishedAt = DateTime.UtcNow;
         }
+
+        public void AddChoices(List<string> choices) => choices.ForEach(choice => Choices.Add(new Choices(choice)));
     }
 }

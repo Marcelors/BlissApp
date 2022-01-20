@@ -1,5 +1,4 @@
-﻿using System;
-using Application.DTOs;
+﻿using Application.DTOs;
 using FluentValidation;
 using Globalization;
 
@@ -9,9 +8,10 @@ namespace Application.Validators
     {
         public QuestionCreatedValidator()
         {
-            RuleFor(x => x.Question).NotEmpty(Resource.QuestionIsRequired);
-            RuleFor(x => x.ImageUrl).NotEmpty(Resource.ImageIsRequired);
-            RuleFor(x => x.ThumbUrl).NotEmpty(Resource.ThumbIsRequired);
+            RuleFor(x => x.Question).NotEmpty().WithMessage(Resource.QuestionIsRequired);
+            RuleFor(x => x.ImageUrl).NotEmpty().WithMessage(Resource.ImageIsRequired);
+            RuleFor(x => x.ThumbUrl).NotEmpty().WithMessage(Resource.ThumbIsRequired);
+            RuleFor(x => x.Choices).NotEmpty().WithMessage(Resource.ChoicesIsRequired);
         }
     }
 }

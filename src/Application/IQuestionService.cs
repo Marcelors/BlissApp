@@ -5,8 +5,9 @@ namespace Application
 {
     public interface IQuestionService
     {
-        public Task<QuestionResponseDto> Add(QuestionCreatedRequestDto dto);
-        public Task<QuestionUpdatedRequestDto> Update(int id, QuestionUpdatedRequestDto dto);
-        public Task<QuestionResponseDto> GetById(int id);
+        Task<QuestionResponseDto> Add(QuestionCreatedRequestDto dto);
+        Task<QuestionUpdatedRequestDto> Update(int id, QuestionUpdatedRequestDto dto);
+        Task<QuestionResponseDto> GetById(int id);
+        Task<PaginatedQuestionResponseDto> Get(FilterDto filter);
     }
 }

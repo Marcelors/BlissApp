@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Application.DTOs;
 using Domain.Entities;
 using Domain.Repositories;
@@ -22,6 +23,16 @@ namespace Application
             await _questionRepository.Add(question);
 
             return question;
+        }
+
+        public async Task<PaginatedQuestionResponseDto> Get(FilterDto filter)
+        {
+            var (totalItens, questions) = await _questionRepository.Get(filter.Filter, filter.Offset, filter.Limit);
+            return new PaginatedQuestionResponseDto
+            {
+                TotalItems = totalItens,
+                Questions = questions.Select(question => (QuestionResponseDto) question).ToList()
+            };
         }
 
         public async Task<QuestionResponseDto> GetById(int id)

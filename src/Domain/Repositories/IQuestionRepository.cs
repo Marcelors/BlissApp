@@ -1,12 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Domain.Entities;
 
 namespace Domain.Repositories
 {
     public interface IQuestionRepository
     {
-        public Task Add(Questions question);
-        public Task Update(Questions question);
-        public Task<Questions> GetById(int id);
+        Task Add(Questions question);
+        Task Update(Questions question);
+        Task<Questions> GetById(int id);
+        Task<(int totalItems, List<Questions> questions)> Get(string filter, int? limit, int? offset);
     }
 }

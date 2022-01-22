@@ -15,6 +15,13 @@ namespace Api.Controllers
             _questionService = questionService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get(FilterDto filterDto)
+        {
+           var result = await _questionService.Get(filterDto);
+           return Ok(result);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

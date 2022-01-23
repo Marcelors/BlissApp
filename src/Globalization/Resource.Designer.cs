@@ -82,5 +82,11 @@ namespace Globalization {
                 return ResourceManager.GetString("ChoicesIsRequired", resourceCulture);
             }
         }
+        
+        public static string InternalServerErrorTryAgainLater {
+            get {
+                return ResourceManager.GetString("InternalServerErrorTryAgainLater", resourceCulture);
+            }
+        }
     }
 }

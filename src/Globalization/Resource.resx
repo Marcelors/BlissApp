@@ -31,4 +31,7 @@
 	<data name="ChoicesIsRequired" xml:space="preserve">
         <value>Choices is required</value>
     </data>
+	<data name="InternalServerErrorTryAgainLater" xml:space="preserve">
+        <value>Internal server error try again later</value>
+    </data>
 </root>

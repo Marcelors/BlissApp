@@ -32,7 +32,11 @@ namespace Api
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IQuestionService, QuestionService>();
 
-            services.AddControllers();
+            services.AddControllers(config =>
+                {
+                    config.Filters.Add(typeof(ExceptionFilter));
+                })
+                .AddNewtonsoftJson(jsonOptions => jsonOptions.UseCamelCasing(processDictionaryKeys: true));
 
             services.AddMvcCore()
              .AddFluentValidation(fluentValidation => fluentValidation.RegisterValidatorsFromAssemblyContaining<QuestionCreatedValidator>());

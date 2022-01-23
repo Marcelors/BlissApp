@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     [Route("questions")]
+    [ApiController]
     public class QuestionController : Controller
     {
         private readonly IQuestionService _questionService;
@@ -16,7 +17,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(FilterDto filterDto)
+        public async Task<IActionResult> Get([FromQuery] FilterDto filterDto)
         {
            var result = await _questionService.Get(filterDto);
            return Ok(result);
@@ -30,14 +31,14 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(QuestionCreatedRequestDto request)
+        public async Task<IActionResult> Add([FromBody] QuestionCreatedRequestDto request)
         {
             var result = await _questionService.Add(request);
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, QuestionUpdatedRequestDto request)
+        public async Task<IActionResult> Update(int id,[FromBody] QuestionUpdatedRequestDto request)
         {
             var result = await _questionService.Update(id, request);
             return Ok(result);

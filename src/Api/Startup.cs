@@ -71,6 +71,8 @@ namespace Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
             }
 
+            UpdateDatabase(app);
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -79,6 +81,13 @@ namespace Api
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            using var context = serviceScope.ServiceProvider.GetRequiredService<Context>();
+            context.Database.Migrate();
         }
     }
 }

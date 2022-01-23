@@ -8,6 +8,9 @@ namespace Infra.Data
     {
         public void Configure(EntityTypeBuilder<Questions> builder)
         {
+            builder.Property(x => x.Choices).HasMaxLength(200).IsRequired();
+            builder.Property(x => x.ImageUrl).HasMaxLength(1000).IsRequired();
+            builder.Property(x => x.ThumbUrl).HasMaxLength(1000).IsRequired();
         }
     }
 }

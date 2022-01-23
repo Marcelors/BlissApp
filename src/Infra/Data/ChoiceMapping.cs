@@ -9,6 +9,7 @@ namespace Infra.Data
 
         public void Configure(EntityTypeBuilder<Choices> builder)
         {
+            builder.Property(x => x.Choice).HasMaxLength(100).IsRequired();
             builder.HasOne(x => x.Question).WithMany(x => x.Choices).OnDelete(DeleteBehavior.Cascade);
         }
     }

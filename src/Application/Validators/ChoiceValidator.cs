@@ -9,7 +9,7 @@ namespace Application.Validators
         public ChoiceValidator()
         {
             RuleFor(x => x.Choice).NotEmpty().WithMessage(Resource.ChoiceIsRequired);
-            RuleFor(x => x.Votes).NotEmpty().WithMessage(Resource.VotesIsRequired);
+            RuleFor(x => x.Votes).NotNull().WithMessage(Resource.VotesIsRequired);
         }
     }
 }

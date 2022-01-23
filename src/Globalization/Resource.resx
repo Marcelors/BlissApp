@@ -34,4 +34,10 @@
 	<data name="InternalServerErrorTryAgainLater" xml:space="preserve">
         <value>Internal server error try again later</value>
     </data>
+	<data name="PleaseReferToTheErrorsPropertyForAdditionalDetails" xml:space="preserve">
+        <value>Please refer to the errors property for additional details</value>
+    </data>
+	<data name="OneOrMoreValidationErrorsOccurred" xml:space="preserve">
+        <value>One or more validation errors occurred</value>
+    </data>
 </root>

@@ -88,5 +88,17 @@ namespace Globalization {
                 return ResourceManager.GetString("InternalServerErrorTryAgainLater", resourceCulture);
             }
         }
+        
+        public static string PleaseReferToTheErrorsPropertyForAdditionalDetails {
+            get {
+                return ResourceManager.GetString("PleaseReferToTheErrorsPropertyForAdditionalDetails", resourceCulture);
+            }
+        }
+        
+        public static string OneOrMoreValidationErrorsOccurred {
+            get {
+                return ResourceManager.GetString("OneOrMoreValidationErrorsOccurred", resourceCulture);
+            }
+        }
     }
 }

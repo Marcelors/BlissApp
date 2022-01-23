@@ -2,6 +2,7 @@
 using Application.Validators;
 using Domain.Repositories;
 using FluentValidation.AspNetCore;
+using Globalization;
 using Infra.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,7 +50,8 @@ namespace Api
                     {
                         Instance = context.HttpContext.Request.Path,
                         Status = StatusCodes.Status400BadRequest,
-                        Detail = "Please refer to the errors property for additional details"
+                        Title = Resource.OneOrMoreValidationErrorsOccurred,
+                        Detail = Resource.PleaseReferToTheErrorsPropertyForAdditionalDetails 
                     };
 
                     return new BadRequestObjectResult(problemDetails)

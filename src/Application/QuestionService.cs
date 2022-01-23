@@ -27,10 +27,10 @@ namespace Application
 
         public async Task<PaginatedQuestionResponseDto> Get(FilterDto filter)
         {
-            var (totalItens, questions) = await _questionRepository.Get(filter.Filter, filter.Offset, filter.Limit);
+            var (totalItems, questions) = await _questionRepository.Get(filter.Filter, filter.Offset, filter.Limit);
             return new PaginatedQuestionResponseDto
             {
-                TotalItems = totalItens,
+                TotalItems = totalItems,
                 Questions = questions.Select(question => (QuestionResponseDto) question).ToList()
             };
         }

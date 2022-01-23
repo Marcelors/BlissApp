@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Application.DTOs;
 using Application.Validators;
 using FluentAssertions;
@@ -35,7 +36,7 @@ namespace Unit
             var result = validator.Validate(choice);
 
             result.IsValid.Should().BeFalse();
-            result.Errors.Should().BeEquivalentTo(errors);
+            result.Errors.Select(x => x.ErrorMessage).Should().BeEquivalentTo(errors);
         }
 
         public class ChoiceRequestData : IEnumerable<object[]>
@@ -49,7 +50,7 @@ namespace Unit
                         Choice = null,
                         Votes = 0
                     },
-                    new[] {Resource.ChoiceIsRequired}
+                    new[] {Resource.ChoiceIsRequired}.ToList()
                 };
                 yield return new object[]
                 {
@@ -58,7 +59,7 @@ namespace Unit
                         Choice = "Apple",
                         Votes = null
                     },
-                    new[] {Resource.VotesIsRequired}
+                    new[] {Resource.VotesIsRequired}.ToList()
                 };
                 yield return new object[]
                 {
@@ -67,7 +68,7 @@ namespace Unit
                         Choice = null,
                         Votes = null
                     },
-                    new[] {Resource.ChoiceIsRequired, Resource.VotesIsRequired}
+                    new[] {Resource.ChoiceIsRequired, Resource.VotesIsRequired}.ToList()
                 };
             }
 

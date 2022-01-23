@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application;
@@ -47,7 +48,7 @@ namespace Unit
 
             var result = await _questionService.Add(request);
 
-            result.Should().Be(expected);
+            result.Should().BeEquivalentTo(expected, config => config.Excluding(y => y.PublishedAt));
         }
 
 
@@ -79,7 +80,7 @@ namespace Unit
 
             var result = await _questionService.GetById(id);
 
-            result.Should().Be(expected);
+            result.Should().BeEquivalentTo(expected, config => config.Excluding(y => y.PublishedAt));
         }
 
         [Fact]
@@ -89,7 +90,9 @@ namespace Unit
 
             var questions = CreateQuestions(amount);
 
-            _questionRepository.Get(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<int>()).Returns((amount, questions));
+            (int totalItems, List<Questions> questions) queryResult = (amount, questions);
+
+            _questionRepository.Get(null, null, null).Returns(queryResult);
 
             var expected = new PaginatedQuestionResponseDto
             {
@@ -99,7 +102,8 @@ namespace Unit
 
             var result = await _questionService.Get(new FilterDto());
 
-            result.Should().Be(expected);
+            result.TotalItems.Should().Be(expected.TotalItems);
+            result.Questions.Should().BeEquivalentTo(expected.Questions, config => config.Excluding(y => y.PublishedAt));
         }
 
         private List<Questions> CreateQuestions(int amount)

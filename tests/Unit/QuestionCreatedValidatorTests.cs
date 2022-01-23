@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Application.DTOs;
 using Application.Validators;
 using FluentAssertions;
@@ -36,7 +37,7 @@ namespace Unit
             var result = validator.Validate(question);
 
             result.IsValid.Should().BeFalse();
-            result.Errors.Should().BeEquivalentTo(errors);
+            result.Errors.Select(x => x.ErrorMessage).Should().BeEquivalentTo(errors);
         }
 
         public class QuestionCreatedRequestData : IEnumerable<object[]>
@@ -52,7 +53,7 @@ namespace Unit
                         Question = "question test",
                         ThumbUrl = "http://thumb.com"
                     },
-                    new[] {Resource.ChoicesIsRequired}
+                    new[] {Resource.ChoicesIsRequired}.ToList()
                 };
                 yield return new object[]
                 {
@@ -63,7 +64,7 @@ namespace Unit
                         Question = "question test",
                         ThumbUrl = "http://thumb.com"
                     },
-                    new[] {Resource.ImageIsRequired}
+                    new[] {Resource.ImageIsRequired}.ToList()
                 };
                 yield return new object[]
                 {
@@ -73,7 +74,7 @@ namespace Unit
                         ImageUrl = "http://image.com",
                         ThumbUrl = "http://thumb.com"
                     },
-                    new[] {Resource.QuestionIsRequired}
+                    new[] {Resource.QuestionIsRequired}.ToList()
                 };
                 yield return new object[]
                 {
@@ -83,7 +84,7 @@ namespace Unit
                         ImageUrl = "http://image.com",
                         Question = "question test",
                     },
-                    new[] {Resource.ThumbIsRequired}
+                    new[] {Resource.ThumbIsRequired}.ToList()
                 };
                 yield return new object[]
                 {
@@ -94,7 +95,7 @@ namespace Unit
                         Question = null,
                         ThumbUrl = null
                     },
-                    new[] {Resource.ChoiceIsRequired, Resource.ImageIsRequired, Resource.QuestionIsRequired, Resource.ThumbIsRequired}
+                    new[] {Resource.ChoiceIsRequired, Resource.ImageIsRequired, Resource.QuestionIsRequired, Resource.ThumbIsRequired}.ToList()
                 };
             }
 

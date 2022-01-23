@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  mssql:
+    image: "mcr.microsoft.com/mssql/server:2019-CU12-ubuntu-20.04"
+    container_name: mssql-bliss-app
+    restart: on-failure
+    ports:
+      - "11000:1433"
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "SA_PASSWORD=Bl1ssApp.*"
+    networks:
+      - bliss-app
+
+networks: 
+  bliss-app:
+    driver: bridge

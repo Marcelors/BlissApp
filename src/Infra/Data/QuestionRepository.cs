@@ -28,7 +28,7 @@ namespace Infra.Data
         {
             var query = _dbset.AsQueryable();
 
-            if (string.IsNullOrWhiteSpace(filter))
+            if (!string.IsNullOrWhiteSpace(filter))
                 query = query.Where(x => x.Question.Contains(filter));
 
             var totalItems = await query.CountAsync();

@@ -33,6 +33,17 @@ namespace Api
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IQuestionService, QuestionService>();
 
+            services.AddCors(c =>
+            {
+                c.AddPolicy("*", opts =>
+                {
+                    opts
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             services.AddControllers(config =>
                 {
                     config.Filters.Add(typeof(ExceptionFilter));
@@ -51,7 +62,7 @@ namespace Api
                         Instance = context.HttpContext.Request.Path,
                         Status = StatusCodes.Status400BadRequest,
                         Title = Resource.OneOrMoreValidationErrorsOccurred,
-                        Detail = Resource.PleaseReferToTheErrorsPropertyForAdditionalDetails 
+                        Detail = Resource.PleaseReferToTheErrorsPropertyForAdditionalDetails
                     };
 
                     return new BadRequestObjectResult(problemDetails)
@@ -65,6 +76,8 @@ namespace Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,6 +91,14 @@ namespace Api
             }
 
             UpdateDatabase(app);
+
+            app.UseCors(opts =>
+            {
+                opts
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
 
             app.UseRouting();
 

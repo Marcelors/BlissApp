@@ -34,7 +34,7 @@
   </el-table>
 </template>
 <script>
-export * as api from "../shared/api";
+import * as Api from "../shared/api";
 
 export default {
   data() {
@@ -46,6 +46,9 @@ export default {
       filter: "",
     };
   },
+  mounted() {
+    this.get();
+  },
   methods: {
     get() {
       const filters = {
@@ -53,8 +56,9 @@ export default {
         offset: this.offset,
         filter: this.filter,
       };
-      api.getQuestions(filters).then((data) => {
-        (this.totalItems = data.totalItems), (this.questions = data.questions);
+      Api.getQuestions(filters).then((data) => {
+        this.totalItems = data.totalItems;
+        this.questions = data.questions;
       });
     },
     detail(id) {},

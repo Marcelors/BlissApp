@@ -11,6 +11,7 @@ const getQuestions = (data) => {
     return instance.get(`${urlBase}questions`, data).then(result => {
         return result.data;
     }).catch(error => {
+        console.log(error)
         throw error.response.data.message
     });
 }

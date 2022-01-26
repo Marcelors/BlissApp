@@ -1,19 +1,48 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Questions</h1>
+    <el-divider></el-divider>
+    <el-container>
+      <el-header>
+        <el-col :span="24"
+          ><el-button type="success" @click="dialogVisible = true"
+            >Add Question</el-button
+          ></el-col
+        >
+      </el-header>
+      <el-main>
+        <el-col :span="24"> <question ref="tableQuestion"></question></el-col>
+      </el-main>
+    </el-container>
+    <add-question
+      :dialogVisible="dialogVisible"
+      @close="dialogVisible = false"
+      @refresh="get"
+    ></add-question>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Question from "./components/Question.vue";
+import AddQuestion from "./components/AddQuestion.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Question,
+    AddQuestion,
+  },
+  data() {
+    return {
+      dialogVisible: false,
+    };
+  },
+  methods: {
+    get() {
+      this.$refs["tableQuestion"].get();
+    },
+  },
+};
 </script>
 
 <style>

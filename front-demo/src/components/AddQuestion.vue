@@ -76,11 +76,19 @@ export default {
       this.form.choices.splice(index, 1);
     },
     addQuestion() {
+      const loading = this.$loading({
+        lock: true,
+        text: "Loading",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
+
       Api.addQuestions(this.form)
         .then((data) => {
           this.$emit("refresh");
           this.clear();
           this.$emit("close");
+          loading.close();
         })
         .catch((err) => {
           if (err.status == 400) {
@@ -96,6 +104,7 @@ export default {
               text: err.data.detail,
             });
           }
+          loading.close();
         });
     },
     clear() {

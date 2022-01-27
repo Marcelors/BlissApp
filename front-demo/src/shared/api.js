@@ -32,7 +32,7 @@ const addQuestions = (data) => {
 }
 
 const updateQuestions = (id, data) => {
-    return instance.post(`${urlBase}questions/${id}`, data).then(result => {
+    return instance.put(`${urlBase}questions/${id}`, data).then(result => {
         return result.data;
     }).catch(error => {
         throw error.response

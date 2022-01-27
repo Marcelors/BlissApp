@@ -51,6 +51,12 @@ export default {
   },
   methods: {
     get() {
+      const loading = this.$loading({
+        lock: true,
+        text: "Loading",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
       const filters = {
         limit: this.limit,
         offset: this.offset,
@@ -60,6 +66,7 @@ export default {
         .then((data) => {
           this.totalItems = data.totalItems;
           this.questions = data.questions;
+          loading.close();
         })
         .catch((err) => {
           this.$swal({
@@ -67,9 +74,12 @@ export default {
             title: err.data.title,
             text: err.data.detail,
           });
+          loading.close();
         });
     },
-    detail(id) {},
+    detail(id) {
+      this.$emit("detail", id);
+    },
   },
 };
 </script>

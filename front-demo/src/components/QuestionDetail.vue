@@ -104,6 +104,11 @@ export default {
           this.question = data;
           loading.close();
           this.$emit("cancel");
+          this.$notify({
+            title: "Success",
+            message: "Question updated successfully",
+            type: "success",
+          });
         })
         .catch((err) => {
           if (err.status == 400) {

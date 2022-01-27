@@ -89,6 +89,11 @@ export default {
           this.clear();
           this.$emit("close");
           loading.close();
+          this.$notify({
+            title: "Success",
+            message: "Question successfully added",
+            type: "success",
+          });
         })
         .catch((err) => {
           if (err.status == 400) {

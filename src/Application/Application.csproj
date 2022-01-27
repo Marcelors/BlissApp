@@ -8,10 +8,12 @@
     <None Remove="DTOs\" />
     <None Remove="FluentValidation" />
     <None Remove="Validators\" />
+    <None Remove="Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Validators\" />
+    <Folder Include="Shared\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />

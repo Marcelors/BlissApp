@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Entities
 {
@@ -22,5 +23,28 @@ namespace Domain.Entities
         }
 
         public void AddChoices(List<string> choices) => choices.ForEach(choice => Choices.Add(new Choices(choice)));
+
+        public bool ThereWasChange(string question, string imageUrl, string thumbUrl)
+        {
+            if (question != Question)
+                return true;
+
+            if (ImageUrl != imageUrl)
+                return true;
+
+            if (ThumbUrl != thumbUrl)
+                return true;
+
+            return false;
+        }
+
+        public void SetVotes(List<Choices> choicesWithVotes)
+        {
+            foreach (var item in choicesWithVotes)
+            {
+                var choice = Choices.FirstOrDefault(x => x.Choice == item.Choice);
+                choice?.SetVotes(item.Votes);
+            }     
+        }
     }
 }

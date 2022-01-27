@@ -13,5 +13,16 @@
             Choice = choice;
             Votes = 0;
         }
+
+        public Choices(string choice, int votes)
+        {
+            Choice = choice;
+            Votes = votes;
+        }
+
+        public void SetVotes(int votes)
+        {
+            Votes = votes;
+        }
     }
 }

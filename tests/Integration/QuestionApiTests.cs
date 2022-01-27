@@ -149,28 +149,53 @@ namespace Integration
         [Fact]
         public async Task Put_to_questions_returns_200_when_passing_valid_data()
         {
-            var request = new QuestionCreatedRequestDto
+            var question = new Questions("Favourite programming language?",
+               "https://dummyimage.com/600x400/000/fff.png&text=question+1+image+(600x400)",
+               "https://dummyimage.com/120x120/000/fff.png&text=question+1+image+(120x120)");
+
+            var choices = new List<string>
             {
-                Choices = new List<string>() { "Apple", "Amazon" },
-                ImageUrl = "http://image.com",
-                Question = "question test",
-                ThumbUrl = "http://thumb.com"
+                "Swift",
+                "Python",
             };
 
-            var response = await HttpClient.PostAsync("questions", request.ToJsonContent());
+            question.AddChoices(choices);
+            await _questionRepository.Add(question);
+
+            var request = new QuestionUpdatedRequestDto
+            {
+                Choices = new List<ChoiceRequestDto>()
+                {
+                    new()
+                    {
+                       Choice = "Swift",
+                       Votes = 15
+                    },
+                     new()
+                    {
+                       Choice = "Python",
+                       Votes = 15
+                    },
+                },
+                ImageUrl = "https://dummyimage.com/600x400/000/fff.png&text=question+1+image+(600x400)",
+                Question = "Favourite programming language?",
+                ThumbUrl = "https://dummyimage.com/120x120/000/fff.png&text=question+1+image+(120x120)"
+            };
+
+            var response = await HttpClient.PutAsync($"questions/{question.Id}", request.ToJsonContent());
             var body = await response.Content.ReadAsAsync<QuestionResponseDto>();
 
             var expectedChoices = new List<ChoiceResponseDto>()
             {
                 new()
                 {
-                    Choice = "Apple",
-                    Votes = 0
+                    Choice = "Swift",
+                    Votes = 15
                 },
                 new()
                 {
-                    Choice = "Amazon",
-                    Votes = 0
+                    Choice = "Python",
+                    Votes = 15
                 }
             };
 
@@ -185,20 +210,44 @@ namespace Integration
         [Fact]
         public async Task Put_to_questions_returns_400_when_passing_valid_data()
         {
-            var request = new QuestionCreatedRequestDto
+            var question = new Questions("Favourite programming language?",
+               "https://dummyimage.com/600x400/000/fff.png&text=question+1+image+(600x400)",
+               "https://dummyimage.com/120x120/000/fff.png&text=question+1+image+(120x120)");
+
+            var choices = new List<string>
             {
-                Choices = new List<string>() { "Apple", "Amazon" },
-                ImageUrl = "http://image.com",
-                ThumbUrl = "http://thumb.com"
+                "Swift",
+                "Python",
             };
 
-            var response = await HttpClient.PostAsync("questions", request.ToJsonContent());
+            question.AddChoices(choices);
+            await _questionRepository.Add(question);
+
+            var request = new QuestionUpdatedRequestDto
+            {
+                Choices = new List<ChoiceRequestDto>()
+                {
+                    new()
+                    {
+                       Choice = "Swift",
+                       Votes = 15
+                    },
+                     new()
+                    {
+                       Choice = "Python",
+                       Votes = 15
+                    },
+                },
+                ImageUrl = "https://dummyimage.com/600x400/000/fff.png&text=question+1+image+(600x400)",
+                ThumbUrl = "https://dummyimage.com/120x120/000/fff.png&text=question+1+image+(120x120)"
+            };
+
+            var response = await HttpClient.PutAsync($"questions/{question.Id}", request.ToJsonContent());
             var body = await response.Content.ReadAsAsync<ProblemDetails>();
 
-
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-            body.Title.Should().Be("");
-            body.Detail.Should().Be("");
+            body.Title.Should().Be(Resource.OneOrMoreValidationErrorsOccurred);
+            body.Detail.Should().Be(Resource.PleaseReferToTheErrorsPropertyForAdditionalDetails);
         }
 
         private async Task CreateQuestions(int amount)
@@ -221,7 +270,7 @@ namespace Integration
 
                 await _questionRepository.Add(question);
             }
-           
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Application.Shared;
 using Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -9,14 +10,39 @@ namespace Api
     {
         public void OnException(ExceptionContext context)
         {
-            HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
+            HttpStatusCode statusCode;
             var exceptionMessage = context.Exception.Message;
+            ProblemDetails problemDetails;
 
-            var problemDetails = new ProblemDetails
+            switch (context.Exception)
             {
-                Title = Resource.InternalServerErrorTryAgainLater,
-                Detail = exceptionMessage
-            };
+                case NotFoundException:
+                    statusCode = HttpStatusCode.NotFound;
+                    problemDetails = new ProblemDetails
+                    {
+                        Title = Resource.InternalServerErrorTryAgainLater,
+                        Detail = exceptionMessage
+                    };
+                    break;
+
+                case BusinessException:
+                    statusCode = HttpStatusCode.UnprocessableEntity;
+                    problemDetails = new ProblemDetails
+                    {
+                        Title = Resource.InternalServerErrorTryAgainLater,
+                        Detail = exceptionMessage
+                    };
+                    break;
+
+                default:
+                    statusCode = HttpStatusCode.InternalServerError;
+                    problemDetails = new ProblemDetails
+                    {
+                        Title = Resource.InternalServerErrorTryAgainLater,
+                        Detail = exceptionMessage
+                    };
+                    break;
+            }
 
             context.ExceptionHandled = true;
             var response = context.HttpContext.Response;

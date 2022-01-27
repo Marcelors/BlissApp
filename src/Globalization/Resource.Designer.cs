@@ -95,6 +95,30 @@ namespace Globalization {
             }
         }
         
+        public static string QuestionNotFound {
+            get {
+                return ResourceManager.GetString("QuestionNotFound", resourceCulture);
+            }
+        }
+        
+        public static string ResouceNotFound {
+            get {
+                return ResourceManager.GetString("ResouceNotFound", resourceCulture);
+            }
+        }
+        
+        public static string QuestionShouldNotIsChanged {
+            get {
+                return ResourceManager.GetString("QuestionShouldNotIsChanged", resourceCulture);
+            }
+        }
+        
+        public static string UnprocessableEntity {
+            get {
+                return ResourceManager.GetString("UnprocessableEntity", resourceCulture);
+            }
+        }
+        
         public static string OneOrMoreValidationErrorsOccurred {
             get {
                 return ResourceManager.GetString("OneOrMoreValidationErrorsOccurred", resourceCulture);

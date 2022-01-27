@@ -37,7 +37,22 @@
 	<data name="PleaseReferToTheErrorsPropertyForAdditionalDetails" xml:space="preserve">
         <value>Please refer to the errors property for additional details</value>
     </data>
-	<data name="OneOrMoreValidationErrorsOccurred" xml:space="preserve">
+	<data name="QuestionNotFound" xml:space="preserve">
+        <value>Question not found</value>
+    </data>
+	<data name="ResouceNotFound" xml:space="preserve">
+        <value>Resource not found</value>
+    </data>
+	<data name="ResouceNotFound" xml:space="preserve">
+        <value>Resource not found</value>
+    </data>
+	<data name="QuestionShouldNotIsChanged" xml:space="preserve">
+        <value>Question should not is changed</value>
+    </data>
+    <data name="UnprocessableEntity" xml:space="preserve">
+        <value>Could not process instructions</value>
+    </data>
+     <data name="OneOrMoreValidationErrorsOccurred" xml:space="preserve">
         <value>One or more validation errors occurred</value>
     </data>
 </root>

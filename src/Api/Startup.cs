@@ -1,10 +1,13 @@
-﻿using Application;
+﻿using System.Net.Mime;
+using System.Text.Json;
+using Application;
 using Application.Validators;
 using Domain.Repositories;
 using FluentValidation.AspNetCore;
 using Globalization;
 using Infra.Data;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -77,7 +80,7 @@ namespace Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
 
-            
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +102,17 @@ namespace Api
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             });
+
+            app.UseHealthChecks("/health",
+               new HealthCheckOptions()
+               {
+                   ResponseWriter = async (context, report) =>
+                   {
+                       var result = JsonSerializer.Serialize(new { status = "Ok" });
+                       context.Response.ContentType = MediaTypeNames.Application.Json;
+                       await context.Response.WriteAsync(result);
+                   }
+               });
 
             app.UseRouting();
 

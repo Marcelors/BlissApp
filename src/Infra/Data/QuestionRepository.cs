@@ -39,7 +39,7 @@ namespace Infra.Data
             if (limit.HasValue)
                 query = query.Take(limit.Value);
 
-            var questions = await query.ToListAsync();
+            var questions = await query.Include(x => x.Choices).ToListAsync();
 
             return new (totalItems, questions);
 
@@ -47,7 +47,7 @@ namespace Infra.Data
 
         public Task<Questions> GetById(int id)
         {
-            return _dbset.FirstOrDefaultAsync(x => x.Id == id);
+            return _dbset.Include(x => x.Choices).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task Update(Questions question)

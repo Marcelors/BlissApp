@@ -83,7 +83,19 @@ export default {
           this.$emit("close");
         })
         .catch((err) => {
-          console.log(err);
+          if (err.status == 400) {
+            this.$swal({
+              icon: "error",
+              title: err.data.detail,
+              text: JSON.stringify(err.data.errors),
+            });
+          } else {
+            this.$swal({
+              icon: "error",
+              title: err.data.title,
+              text: err.data.detail,
+            });
+          }
         });
     },
     clear() {

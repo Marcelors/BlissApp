@@ -56,10 +56,18 @@ export default {
         offset: this.offset,
         filter: this.filter,
       };
-      Api.getQuestions(filters).then((data) => {
-        this.totalItems = data.totalItems;
-        this.questions = data.questions;
-      });
+      Api.getQuestions(filters)
+        .then((data) => {
+          this.totalItems = data.totalItems;
+          this.questions = data.questions;
+        })
+        .catch((err) => {
+          this.$swal({
+            icon: "error",
+            title: err.data.title,
+            text: err.data.detail,
+          });
+        });
     },
     detail(id) {},
   },

@@ -8,7 +8,9 @@ const instance = axios.create({
 });
 
 const getQuestions = (data) => {
-    return instance.get(`${urlBase}questions`, data).then(result => {
+    return instance.get(`${urlBase}questions`, {
+        params: data
+    }).then(result => {
         return result.data;
     }).catch(error => {
         throw error.response

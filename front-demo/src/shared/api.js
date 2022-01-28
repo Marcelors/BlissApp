@@ -39,9 +39,25 @@ const updateQuestions = (id, data) => {
     });
 }
 
+const shareQuestion = (data) => {
+    return instance.post(`${urlBase}share`, data).then(result => {
+        return result.data;
+    }).catch(error => {
+        throw error.response
+    });
+}
+
+const health = (data) => {
+    return instance.get(`${urlBase}health`).catch(error => {
+        throw error.response
+    });
+}
+
 export {
     getQuestions,
     getQuestionsById,
     addQuestions,
-    updateQuestions
+    updateQuestions,
+    shareQuestion,
+    health
 }

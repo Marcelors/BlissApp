@@ -1,5 +1,4 @@
-﻿using System;
-using Application.DTOs;
+﻿using Application.DTOs;
 using Microsoft.Extensions.Logging;
 
 namespace Application
@@ -7,6 +6,11 @@ namespace Application
     public class ShareService : IShareService
     {
         private readonly ILogger _logger;
+
+        public ShareService(ILogger<ShareService> logger)
+        {
+            _logger = logger;
+        }
 
         public void Send(ShareRequestDto dto)
         {

@@ -44,19 +44,33 @@
     <el-divider></el-divider>
     <el-form-item>
       <el-button @click="cancel">Cancel</el-button>
+      <el-button type="primary" @click="dialogVisible = true"
+        >Share Question</el-button
+      >
       <el-button type="primary" @click="update">Update</el-button>
     </el-form-item>
+
+    <share
+      :dialogVisible="dialogVisible"
+      :id="id"
+      @close="dialogVisible = false"
+    ></share>
   </el-form>
 </template>
 <script>
 import * as Api from "../shared/api";
+import Share from "./Share.vue";
 
 export default {
   props: ["id"],
   data() {
     return {
       question: null,
+      dialogVisible: false,
     };
+  },
+  components: {
+    Share,
   },
   mounted() {
     if (this.id) this.getById(this.id);

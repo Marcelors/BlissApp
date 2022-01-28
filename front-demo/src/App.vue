@@ -39,6 +39,7 @@
 import Question from "./components/Question.vue";
 import AddQuestion from "./components/AddQuestion.vue";
 import QuestionDetail from "./components/QuestionDetail.vue";
+import * as Api from "./shared/api";
 
 export default {
   name: "App",
@@ -54,6 +55,9 @@ export default {
       id: null,
     };
   },
+  mounted() {
+    this.health();
+  },
   methods: {
     get() {
       this.$refs["tableQuestion"].get();
@@ -62,6 +66,22 @@ export default {
       this.mainScreen = false;
       this.$refs["questionDetail"].getById(id);
       this.id = id;
+    },
+    health() {
+      Api.health()
+        .then(() => {
+          setTimeout(() => {
+            this.health();
+          }, 60000);
+        })
+        .catch(() => {
+          this.$swal({
+            icon: "error",
+            title: "Retry Action",
+          }).then(() => {
+            this.health();
+          });
+        });
     },
   },
 };

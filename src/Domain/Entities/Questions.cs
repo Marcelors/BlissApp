@@ -22,6 +22,15 @@ namespace Domain.Entities
             PublishedAt = DateTime.UtcNow;
         }
 
+        public Questions(int id, string question, string imageUrl, string thumbUrl)
+        {
+            Question = question;
+            ImageUrl = imageUrl;
+            ThumbUrl = thumbUrl;
+            PublishedAt = DateTime.UtcNow;
+            SetId(id);
+        }
+
         public void AddChoices(List<string> choices) => choices.ForEach(choice => Choices.Add(new Choices(choice)));
 
         public bool ThereWasChange(string question, string imageUrl, string thumbUrl)

@@ -87,8 +87,8 @@ namespace Integration
             var body = await response.Content.ReadAsAsync<PaginatedQuestionResponseDto>();
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            body.TotalItems.Should().Be(10);
-            body.Questions.Should().HaveCount(10);
+            body.TotalItems.Should().Be(22);
+            body.Questions.Should().HaveCount(22);
         }
 
         [Fact]

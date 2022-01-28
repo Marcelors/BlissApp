@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
@@ -35,6 +36,8 @@ namespace Api
 
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<IShareService, ShareService>();
+            services.AddLogging();
 
             services.AddCors(c =>
             {
@@ -109,7 +112,7 @@ namespace Api
                {
                    ResponseWriter = async (context, report) =>
                    {
-                       var result = JsonSerializer.Serialize(new { status = "Ok" });
+                       var result = JsonSerializer.Serialize(new { status = report.Status == HealthStatus.Unhealthy ? "Service Unavailable.Please try again later." : "Ok" });
                        context.Response.ContentType = MediaTypeNames.Application.Json;
                        await context.Response.WriteAsync(result);
                    }

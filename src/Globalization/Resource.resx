@@ -52,7 +52,19 @@
     <data name="UnprocessableEntity" xml:space="preserve">
         <value>Could not process instructions</value>
     </data>
-     <data name="OneOrMoreValidationErrorsOccurred" xml:space="preserve">
+    <data name="UrlIsInvalid" xml:space="preserve">
+        <value>Url is Invalid</value>
+    </data>
+    <data name="DestinationEmailIsRequired" xml:space="preserve">
+        <value>Destination email is required</value>
+    </data>
+    <data name="EmailIsInvalid" xml:space="preserve">
+        <value>Email is Invalid</value>
+    </data>
+    <data name="ContentUrlIsRequired" xml:space="preserve">
+        <value>Content url is required</value>
+    </data>
+    <data name="OneOrMoreValidationErrorsOccurred" xml:space="preserve">
         <value>One or more validation errors occurred</value>
     </data>
 </root>

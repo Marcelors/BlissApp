@@ -95,7 +95,7 @@ namespace Unit
                         Question = null,
                         ThumbUrl = null
                     },
-                    new[] {Resource.ChoiceIsRequired, Resource.ImageIsRequired, Resource.QuestionIsRequired, Resource.ThumbIsRequired}.ToList()
+                    new[] {Resource.QuestionIsRequired, Resource.ImageIsRequired, Resource.ThumbIsRequired, Resource.ChoicesIsRequired}.ToList()
                 };
             }
 

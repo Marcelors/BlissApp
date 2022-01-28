@@ -83,7 +83,7 @@ namespace Unit
                         ImageUrl = "http://image.com",
                         ThumbUrl = "http://thumb.com"
                     },
-                    new[] {Resource.QuestionIsRequired}
+                    new[] {Resource.QuestionIsRequired}.ToList()
                 };
                 yield return new object[]
                 {
@@ -107,7 +107,7 @@ namespace Unit
                         Question = null,
                         ThumbUrl = null
                     },
-                    new[] {Resource.ChoiceIsRequired, Resource.ImageIsRequired, Resource.QuestionIsRequired, Resource.ThumbIsRequired}.ToList()
+                    new[] {Resource.QuestionIsRequired, Resource.ImageIsRequired, Resource.ThumbIsRequired, Resource.ChoicesIsRequired}.ToList()
                 };
             }
 

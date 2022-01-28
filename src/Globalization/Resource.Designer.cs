@@ -119,6 +119,30 @@ namespace Globalization {
             }
         }
         
+        public static string UrlIsInvalid {
+            get {
+                return ResourceManager.GetString("UrlIsInvalid", resourceCulture);
+            }
+        }
+        
+        public static string DestinationEmailIsRequired {
+            get {
+                return ResourceManager.GetString("DestinationEmailIsRequired", resourceCulture);
+            }
+        }
+        
+        public static string EmailIsInvalid {
+            get {
+                return ResourceManager.GetString("EmailIsInvalid", resourceCulture);
+            }
+        }
+        
+        public static string ContentUrlIsRequired {
+            get {
+                return ResourceManager.GetString("ContentUrlIsRequired", resourceCulture);
+            }
+        }
+        
         public static string OneOrMoreValidationErrorsOccurred {
             get {
                 return ResourceManager.GetString("OneOrMoreValidationErrorsOccurred", resourceCulture);

@@ -15,3 +15,12 @@
 # Front-Demo
 
 - Open folder Front-Demo, there you will find how to run the project in detail
+
+# Api
+
+- You can open BlissApp in your favorite IDE like Visual Studio or Vs code.
+- You can run from command line too. `dotnet run --project ./src/Api/Api.csproj`
+
+# Data
+
+- There is a migration which will run when starting the application with initial data for testing
